@@ -28,15 +28,28 @@ class SortedSearch
 public:
     static int countNumbers(const std::vector<int>& sortedVector, int lessThan)
     {
-        int vectorLength=sortedVector.size();
-        int i=0;    //# of vector elements less than the given parameter
-        while(i<vectorLength){
-            if(sortedVector[i]>=lessThan){
-                //return i;
-                break;
-            }
-            i++;
+        
+        if(sortedVector.back()<lessThan){
+            //all elements in vector less than given parameter
+            int vectorLength=sortedVector.size();
+            return vectorLength;
         }
-        return i;
+        else if(sortedVector.front()>lessThan){
+            //no elements less than given parameter
+            return 0;
+        }
+        else{
+            int i=0;    //# of vector elements less than the given parameter
+            int vectorLength=sortedVector.size();
+            while(i<vectorLength){
+                if(sortedVector[i]>=lessThan){
+                    //return i;
+                    break;
+                }
+                i++;
+            }
+            return i;
+        }
+        
     }
 };
