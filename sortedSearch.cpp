@@ -20,40 +20,55 @@
 #include <vector>
 #include <stdexcept>
 #include <iostream>
-
-
 class SortedSearch
 {
 public:
     static int countNumbers(const std::vector<int>& sortedVector, int lessThan)
     {
-        
-        if(sortedVector.back()<lessThan){
+        if(sortedVector.back()<=lessThan){
             //all elements in vector less than given parameter
-            int vectorLength=sortedVector.size();
-            return vectorLength;
+            //int vectorLength=sortedVector.size();
+            if(sortedVector.back()==lessThan){
+                return sortedVector.size()-1;
+            }
+            else{
+                return sortedVector.size();
+            }
         }
         else if(sortedVector.front()>=lessThan){
             //no elements less than given parameter
             return 0;
         }
         else{
-  
+            
             int vectorLength=sortedVector.size();
-            if(sortedVector.back()==lessThan){
-                return vectorLength-1;
-            }
-            else{
-                int i=0;    //# of vector elements less than the given parameter
-                while(i<vectorLength){
+            int i=1;  //# of vector elements less than the given parameter
+            int j=vectorLength/2;
+            
+            if(sortedVector[j]<lessThan){
+                while(j<vectorLength){
+                    if(sortedVector[j]>=lessThan){
+                        //return j;
+                        i=j;
+                        break;
+                    }
+                    j++;
+                }
+            }else if(sortedVector[j]>lessThan){
+                while(i<j){
                     if(sortedVector[i]>=lessThan){
                         //return i;
                         break;
                     }
-                    i++;
+                     i++;
                 }
-                return i;
+               
             }
+            else{
+                i=j;
+            }
+            
+            return i;
             
         }
         
