@@ -46,12 +46,31 @@ private:
     Node* left;
     Node* right;
 };
-
 class BinarySearchTree
 {
 public:
     static bool contains(const Node& root, int value)
     {
-        throw std::logic_error("Waiting to be implemented");
+    
+            if(root.getValue()==value){
+                return true;
+            }
+            else if(root.getValue()<value){
+                //value is less than that held by node we are at
+                if(root.getRight()!=NULL){
+                    return contains(*root.getRight(),value);
+            
+                }
+            
+            }else{
+            //value is less than that held by node we are at
+                if(root.getLeft()!=NULL){
+                    return (contains(*root.getLeft(),value));
+            
+                }
+            
+            }
+
+        return false;
     }
 };
