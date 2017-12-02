@@ -9,6 +9,8 @@
 /*
  This code is a practice C++ interview question from testdome.com
  https://www.testdome.com/for-developers/solve-question/11891
+ 
+  Problem statement: "Implement function countNumbers that accepts a sorted vector of integers and counts the number of vector elements that are less than the parameter lessThan."
  */
 
 #include <stdio.h>
