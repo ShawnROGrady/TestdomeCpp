@@ -22,7 +22,6 @@
 #include <iostream>
 
 
-
 class SortedSearch
 {
 public:
@@ -34,21 +33,28 @@ public:
             int vectorLength=sortedVector.size();
             return vectorLength;
         }
-        else if(sortedVector.front()>lessThan){
+        else if(sortedVector.front()>=lessThan){
             //no elements less than given parameter
             return 0;
         }
         else{
-            int i=0;    //# of vector elements less than the given parameter
+  
             int vectorLength=sortedVector.size();
-            while(i<vectorLength){
-                if(sortedVector[i]>=lessThan){
-                    //return i;
-                    break;
-                }
-                i++;
+            if(sortedVector.back()==lessThan){
+                return vectorLength-1;
             }
-            return i;
+            else{
+                int i=0;    //# of vector elements less than the given parameter
+                while(i<vectorLength){
+                    if(sortedVector[i]>=lessThan){
+                        //return i;
+                        break;
+                    }
+                    i++;
+                }
+                return i;
+            }
+            
         }
         
     }
