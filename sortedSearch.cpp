@@ -42,9 +42,25 @@ public:
         else{
             
             int vectorLength=sortedVector.size();
-            int i=1;  //# of vector elements less than the given parameter
+            int i=vectorLength/2;  //# of vector elements less than the given parameter
             int j=vectorLength/2;
-            
+            while(i>1){
+                if(sortedVector[j]<lessThan){
+                    //i=j;
+                    j=j+j/2;
+                }else if(sortedVector[j]>lessThan){
+                    //i=j;
+                    j=j/2;
+                }
+                else{
+                    //middle value of vector was equal to less than
+                    //i=j;
+                    break;
+                }
+                i=i/2;
+                
+            }
+            i=j-1;
             if(sortedVector[j]<lessThan){
                 while(j<vectorLength){
                     if(sortedVector[j]>=lessThan){
@@ -60,17 +76,16 @@ public:
                         //return i;
                         break;
                     }
-                     i++;
+                    i++;
                 }
-               
+                
             }
             else{
                 i=j;
             }
             
-            return i;
+        return i;
             
         }
-        
     }
 };
