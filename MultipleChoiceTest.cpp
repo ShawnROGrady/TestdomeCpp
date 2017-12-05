@@ -5,6 +5,13 @@
 //  Created by Shawn O'Grady on 12/5/17.
 //  Copyright © 2017 Shawn O'Grady. All rights reserved.
 //
+/*
+ This code is a practice C++ interview question from testdome.com
+ https://www.testdome.com/for-developers/solve-question/9808
+ 
+ Problem statement: Multiple choice test has several multiple choice questions. Each question can have only one correct answer. Additionally, timed multiple choice test can specify the time allowed for solving each question in the test.
+    -The code seen at the url above satisfies this specification, but the customer complained that the memory usage of the program constantly increases. Fix this problem.
+ */
 
 #include <stdio.h>
 #include <iostream>
