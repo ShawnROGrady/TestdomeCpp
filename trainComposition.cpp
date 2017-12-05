@@ -17,6 +17,7 @@
  
  + This sounds a lot like a doubly-linked list queue, with the only modification being that you an enqueue+dequeue from either end
  
+ + Runs well with 3/3 tests passed
  */
 
 #include <stdexcept>
@@ -50,21 +51,60 @@ public:
     TrainComposition(){leftMost=rightMost=NULL;}
     void attachWagonFromLeft(int wagonId)
     {
-        throw std::logic_error("Waiting to be implemented");
+        TrainNode *tmp=new TrainNode(wagonId);
+        if(leftMost !=NULL){
+            //there are trains in the composition
+            leftMost->setLeftTrain(tmp);
+            tmp->setRightTrain(leftMost);
+            leftMost=tmp;
+        }else{
+            leftMost=tmp;
+            rightMost=tmp;
+        }
     }
     
     void attachWagonFromRight(int wagonId)
     {
-        throw std::logic_error("Waiting to be implemented");
+        TrainNode *tmp=new TrainNode(wagonId);
+        if(rightMost !=NULL){
+            //there are trains in the composition
+            rightMost->setRightTrain(tmp);
+            tmp->setLeftTrain(rightMost);
+            rightMost=tmp;
+            
+        }else{
+            leftMost=tmp;
+            rightMost=tmp;
+        }
     }
     
     int detachWagonFromLeft()
     {
-        throw std::logic_error("Waiting to be implemented");
+        TrainNode *tmp;
+        if(leftMost!=NULL){
+            //there are trins in the composition
+            tmp=leftMost;
+            leftMost=leftMost->getRightTrain();
+            int tmpValue=tmp->getValue();
+            delete tmp;
+            return tmpValue;
+        }else{
+            return NULL;
+        }
     }
     
     int detachWagonFromRight()
     {
-        throw std::logic_error("Waiting to be implemented");
+        TrainNode *tmp;
+        if(rightMost!=NULL){
+            //there are trins in the composition
+            tmp=rightMost;
+            rightMost=rightMost->getLeftTrain();
+            int tmpValue=tmp->getValue();
+            delete tmp;
+            return tmpValue;
+        }else{
+            return NULL;
+        }
     }
 };
