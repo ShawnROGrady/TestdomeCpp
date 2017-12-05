@@ -14,15 +14,38 @@
     -For example, if we start by attaching wagon 7 from the left followed by attaching wagon 13, again from the left, we get a composition of two wagons (13 and 7 from left to right). 
     -Now the first wagon that can be detached from the right is 7 and the first that can be detached from the left is 13.
     -Implement a TrainComposition that models this problem
+ 
+ + This sounds a lot like a doubly-linked list queue, with the only modification being that you an enqueue+dequeue from either end
+ 
  */
 
 #include <stdexcept>
 #include <iostream>
 #include <stdio.h>
+//basically just the node for a dll
+class TrainNode{
+private:
+    int value;
+    TrainNode *leftTrain;
+    TrainNode *rightTrain;
+public:
+    TrainNode(){leftTrain=rightTrain=NULL;}
+    TrainNode(int wagonId){
+        value=wagonId;
+        leftTrain=rightTrain=NULL;
+    }
+    int getValue(){return value;}
+    void setLeftTrain(TrainNode *newNode){leftTrain=newNode;}
+    void setRightTrain(TrainNode *newNode){rightTrain=newNode;}
+};
 
 class TrainComposition
 {
+private:
+    TrainNode *leftMost;
+    TrainNode *rightMost;
 public:
+    TrainComposition(){leftMost=rightMost=NULL;}
     void attachWagonFromLeft(int wagonId)
     {
         throw std::logic_error("Waiting to be implemented");
