@@ -37,6 +37,8 @@ public:
     int getValue(){return value;}
     void setLeftTrain(TrainNode *newNode){leftTrain=newNode;}
     void setRightTrain(TrainNode *newNode){rightTrain=newNode;}
+    TrainNode* getRightTrain(){return rightTrain;}
+    TrainNode* getLeftTrain(){return leftTrain;}
 };
 
 class TrainComposition
