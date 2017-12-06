@@ -10,9 +10,10 @@
  https://www.testdome.com/for-developers/solve-question/9808
  
  Problem statement: Multiple choice test has several multiple choice questions. Each question can have only one correct answer. Additionally, timed multiple choice test can specify the time allowed for solving each question in the test.
-    -The code seen at the url above satisfies this specification, but the customer complained that the memory usage of the program constantly increases. Fix this problem.
+ -The code seen at the url above satisfies this specification, but the customer complained that the memory usage of the program constantly increases. Fix this problem.
+ 
+ +Problem is that memory is never de-allocated
  */
-
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -39,6 +40,10 @@ public:
     int getAnswer(int questionIndex) const
     {
         return answers[questionIndex];
+    }
+    ~MultipleChoiceTest(){
+        //destructor, deallocate memory
+        delete[] answers;
     }
     
 protected:
@@ -69,6 +74,10 @@ public:
     int getTime(int questionIndex) const
     {
         return times[questionIndex];
+    }
+    ~TimedMultipleChoiceTest(){
+        //destructor, deallocate memory
+        delete[] times;
     }
     
 private:
