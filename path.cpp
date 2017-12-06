@@ -18,8 +18,8 @@
         -the function should support both realtive and absolute paths
         -the function will not be passed any invalid paths
         -do not use built-in path-related functions
-        
-  + Reference: https://en.wikipedia.org/wiki/Cd_(command)
+ 
+ + References: https://en.wikipedia.org/wiki/Cd_(command) , http://linuxcommand.org/lc3_lts0020.php
  */
 #include <stdio.h>
 #include <iostream>
@@ -49,17 +49,48 @@ public:
             int pathLength=currentPath.length();
             if(newPath[i]=='.'&&newPath[i+1]=='.'){
                 //move up one directory
-                currentPath.erase(pathLength-2*(i+1),2);
-                i=i+3;
+                if(pathLength>2){
+                    currentPath.erase(pathLength-2,2);
+                    i=i+3;
+                }
+                else{
+                    //root directory
+                    currentPath.erase(pathLength-1,2);
+                    i=i+3;
+                }
+                
             }
             else if(newPath[i]=='/'){
-                //currentPath=currentPath+newPath[i]+newPath[i+1];
+                //direct pathname
+                /*
+                int j=pathLength-1;
+                while(currentPath[j]!=newPath[i+1]){
+                    //this is ok since we are assuming no invalid paths will be given
+                    currentPath.erase(pathLength-1, 1);
+                    j=j-1;
+                }
+                
+                if(pathLength>2){
+                    currentPath.erase(pathLength-2,2);
+                    i=i+2;
+                }
+                else{
+                    //root directory
+                    currentPath.erase(pathLength-1,2);
+                    i=i+2;
+                }
+                 */
                 currentPath=newPath;
+                i=i+newPathLength;
+            }
+            else if(newPath[i]=='.'&&newPath[i+1]=='/'){
+                //relative pathname to child directory
                 i=i+2;
             }
             else{
+                //relative pathname to child directory w/o "./"
                 currentPath=currentPath+"/"+newPath[i];
-                i=i+1;
+                i=i+2;
             }
         }
         
