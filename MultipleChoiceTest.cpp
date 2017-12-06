@@ -13,6 +13,11 @@
  -The code seen at the url above satisfies this specification, but the customer complained that the memory usage of the program constantly increases. Fix this problem.
  
  +Problem is that memory is never de-allocated
+    -fixed with a couple of simple class destructors
+    -making destructor of MultipleChoiceTest class (the base class) important for when using TimedMultipleChoiceTest class as a derived class
+        -this article helped me understand the logic behind this a bit better: http://www.gotw.ca/publications/mill18.htm
+ 
+ + Runs well with 3/3 tests passed
  */
 #include <stdio.h>
 #include <iostream>
@@ -41,7 +46,7 @@ public:
     {
         return answers[questionIndex];
     }
-    ~MultipleChoiceTest(){
+    virtual ~MultipleChoiceTest(){
         //destructor, deallocate memory
         delete[] answers;
     }
@@ -75,7 +80,8 @@ public:
     {
         return times[questionIndex];
     }
-    ~TimedMultipleChoiceTest(){
+    ~TimedMultipleChoiceTest()
+    {
         //destructor, deallocate memory
         delete[] times;
     }
