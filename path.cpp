@@ -18,6 +18,8 @@
         -the function should support both realtive and absolute paths
         -the function will not be passed any invalid paths
         -do not use built-in path-related functions
+        
+  + Reference: https://en.wikipedia.org/wiki/Cd_(command)
  */
 #include <stdio.h>
 #include <iostream>
@@ -39,7 +41,28 @@ public:
     
     void cd(std::string newPath)
     {
-        throw std::logic_error("Waiting to be implemented");
+        
+        int newPathLength=newPath.length();
+        //std::cout<<"newPathLength="<<newPathLength;
+        int i=0;
+        while(i<newPathLength){
+            int pathLength=currentPath.length();
+            if(newPath[i]=='.'&&newPath[i+1]=='.'){
+                //move up one directory
+                currentPath.erase(pathLength-2*(i+1),2);
+                i=i+3;
+            }
+            else if(newPath[i]=='/'){
+                //currentPath=currentPath+newPath[i]+newPath[i+1];
+                currentPath=newPath;
+                i=i+2;
+            }
+            else{
+                currentPath=currentPath+"/"+newPath[i];
+                i=i+1;
+            }
+        }
+        
     }
     
 private:
