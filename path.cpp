@@ -12,7 +12,7 @@
  Problem statement: Write a function that provides change directory (cd) function for an abstract file system.
     -additional notes:
         -root path is '/'
- `      -path separator is '\'
+ `      -path separator is '/'
         -parent directory is addressable as ".."
         -directory names consist only of English alphabet letters (A-Z and a-z)
         -the function should support both realtive and absolute paths
