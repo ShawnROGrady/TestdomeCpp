@@ -47,7 +47,7 @@ public:
         
         int newPathLength=newPath.length();
         
-        if (newPathLength==1&&isspace(newPath[0])){
+        if (newPathLength==1&&(isspace(newPath[0])||newPath[0]=='/')){
             currentPath="/";
         }
          
@@ -117,7 +117,12 @@ public:
                 else{
                     //relative pathname to child directory w/o "./"
                     pastPath=currentPath;
-                    currentPath=currentPath+"/"+newPath[i];
+                    if (pathLength>1){
+                        currentPath=currentPath+"/"+newPath[i];
+                    }
+                    else{
+                        currentPath=currentPath+newPath[i];
+                    }
                     i=i+2;
                 }
             }
