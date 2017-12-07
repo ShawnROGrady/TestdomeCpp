@@ -50,7 +50,6 @@ public:
         if (newPathLength==1&&(isspace(newPath[0])||newPath[0]=='/')){
             currentPath="/";
         }
-         
         else if(newPathLength>0&&newPath[0]!='~'){
             int i=0;
             while(i<newPathLength){
@@ -64,7 +63,7 @@ public:
                     }
                     else{
                         //root directory
-                        currentPath.erase(pathLength-1,2);
+                        currentPath="/";
                         i=i+3;
                     }
                     
