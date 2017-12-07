@@ -34,6 +34,7 @@ public:
     Path(std::string path)
     {
         currentPath = path;
+        pastPath=path;
     }
     
     std::string getPath() const
@@ -45,12 +46,18 @@ public:
     {
         
         int newPathLength=newPath.length();
-        if(newPathLength>0&&newPath[0]!='~'){
+        
+        if (newPathLength==1&&isspace(newPath[0])){
+            currentPath="/";
+        }
+         
+        else if(newPathLength>0&&newPath[0]!='~'){
             int i=0;
-            while(i<newPathLength&&!isspace(newPath[i])){
+            while(i<newPathLength){
                 int pathLength=currentPath.length();
                 if(newPath[i]=='.'&&newPath[i+1]=='.'){
                     //move up one directory
+                    pastPath=currentPath;
                     if(pathLength>2){
                         currentPath.erase(pathLength-2,2);
                         i=i+3;
@@ -64,17 +71,28 @@ public:
                 }
                 else if(newPath[i]=='/'){
                     //direct pathname
-                    currentPath.erase(0,pathLength);
+                    
+                    pastPath=currentPath;
+                    //currentPath.erase(0,pathLength);
+                    currentPath.clear();
                     int j=0;
-                    while(newPath[j]!='.'&&j<newPathLength){
+                    while(j<newPathLength){
                         //this is ok since we are assuming no invalid paths will be given
-                        currentPath=currentPath+newPath[j];
+                        if(newPath[j]=='.'){
+                            break;
+                        }
+                        currentPath+=newPath[j];
                         j++;
+                        
                     }
+                    
                     if(currentPath[j-1]=='/'){
                         currentPath.erase(j-1,1);   //get rid of extra '/'
                     }
+                    
                     i=i+j;
+                     
+                    
                 }
                 else if(newPath[i]=='.'){
                     if(newPath[i+1]=='/'){
@@ -86,8 +104,19 @@ public:
                     }
                     
                 }
+                
+                else if(isspace(newPath[i])){
+                    i++;    //just ignore spaces
+                }
+                 
+                else if(newPath[i]=='-'){
+                    //didn't say in problem statement to implement this, but figured I'd add it
+                    swap(pastPath,currentPath);
+                    i++;
+                }
                 else{
                     //relative pathname to child directory w/o "./"
+                    pastPath=currentPath;
                     currentPath=currentPath+"/"+newPath[i];
                     i=i+2;
                 }
@@ -102,6 +131,7 @@ public:
     }
     
 private:
+    std::string pastPath;
     std::string currentPath;
 };
 /*
