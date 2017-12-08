@@ -56,7 +56,7 @@ public:
                 return true;
             }
             else if(root.getValue()<value){
-                //value is less than that held by node we are at
+                //value is greater than that held by node we are at
                 if(root.getRight()!=NULL){
                     return contains(*root.getRight(),value);
             
