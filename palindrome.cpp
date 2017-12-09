@@ -15,11 +15,10 @@
 #include <string>
 #include <stdexcept>
 #include <iostream>
-using namespace std;
 
 class Palindrome{
 public:
-    static bool isPalindrome(const string &word){
+    static bool isPalindrome(const std::string &word){
         int stringLength=word.length();
         for(int i=0; i<stringLength; i++){
             if(tolower(word[i])!=tolower(word[stringLength-i-1])){
